@@ -9,9 +9,7 @@ const CustomInput = (props) => {
         {label}
       </Text>
       <Input
-        mt={1}
-        size="xl"
-        rounded="xl"
+        mt={2}
         value={value}
         bgColor="#EFEAEB"
         onChangeText={setValue}
