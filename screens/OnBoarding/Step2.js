@@ -91,6 +91,7 @@ const Step2 = ({ handleNextStep }) => {
         value={user.telefone}
         keyboardType="numeric"
         setValue={handleTelefone}
+        placeholder="Ex: (12) 93456-7891"
       />
       <CustomInput
         label='Email'

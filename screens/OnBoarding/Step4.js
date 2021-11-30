@@ -17,8 +17,8 @@ const Step4 = ({ handleNextStep }) => {
   ]
 
   const handleNext = () => {
-    // handleNextStep([])
-    console.log(user)
+    handleNextStep([])
+    // console.log(user)
   }
 
   const handleSintomas = (value) => {

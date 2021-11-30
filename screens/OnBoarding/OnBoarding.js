@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {ImageBackground, Platform} from "react-native";
-import {Flex, Image, KeyboardAvoidingView, useToast} from "native-base";
+import {Flex, Image, KeyboardAvoidingView, StatusBar, useToast} from "native-base";
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -9,10 +9,11 @@ import Step3 from "./Step3";
 import Logo from '../../assets/Images/logo.png';
 import Hospital from '../../assets/Images/hospital.png';
 import Step4 from "./Step4";
+import MapResult from "../MapResult/MapResult";
 
 const OnBoarding = () => {
   const toast = useToast();
-  const [currentStatus, setCurrentStatus] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState(4);
 
   const handleNextStep = (validations) => {
     let hasEmptyValue = false;
@@ -44,6 +45,7 @@ const OnBoarding = () => {
 
   return (
     <ImageBackground source={Hospital} style={{flex: 1}}>
+      <StatusBar barStyle="dark-content" />
       <Image w={32} h={12} source={Logo} alt="Logo" top={[10, 10, 10, 4]} right="auto" left={4} position="absolute" />
       <KeyboardAvoidingView
         my="auto"
@@ -61,6 +63,9 @@ const OnBoarding = () => {
           )}
           {currentStatus === 3 && (
             <Step4 handleNextStep={handleNextStep} handleGoBack={handleGoBack} />
+          )}
+          {currentStatus === 4 && (
+            <MapResult handleNextStep={handleNextStep} handleGoBack={handleGoBack} />
           )}
         </Flex>
       </KeyboardAvoidingView>
