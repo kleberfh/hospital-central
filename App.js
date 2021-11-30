@@ -1,13 +1,19 @@
 import React from 'react';
 import {RecoilRoot} from 'recoil';
+import Router from "./Router/router";
+import { LogBox } from 'react-native';
 import {NativeBaseProvider} from "native-base";
-import OnBoarding from "./screens/OnBoarding/OnBoarding";
+import { NavigationContainer } from '@react-navigation/native';
+
+LogBox.ignoreAllLogs();
 
 export default function App() {
   return (
     <RecoilRoot>
       <NativeBaseProvider>
-        <OnBoarding />
+        <NavigationContainer>
+          <Router />
+        </NavigationContainer>
       </NativeBaseProvider>
     </RecoilRoot>
   );

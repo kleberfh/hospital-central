@@ -10,10 +10,11 @@ import Logo from '../../assets/Images/logo.png';
 import Hospital from '../../assets/Images/hospital.png';
 import Step4 from "./Step4";
 import MapResult from "../MapResult/MapResult";
+import Step5 from "./Step5";
 
 const OnBoarding = () => {
   const toast = useToast();
-  const [currentStatus, setCurrentStatus] = useState(4);
+  const [currentStatus, setCurrentStatus] = useState(0);
 
   const handleNextStep = (validations) => {
     let hasEmptyValue = false;
@@ -65,6 +66,9 @@ const OnBoarding = () => {
             <Step4 handleNextStep={handleNextStep} handleGoBack={handleGoBack} />
           )}
           {currentStatus === 4 && (
+            <Step5 handleNextStep={handleNextStep} handleGoBack={handleGoBack} />
+          )}
+          {currentStatus === 5 && (
             <MapResult handleNextStep={handleNextStep} handleGoBack={handleGoBack} />
           )}
         </Flex>

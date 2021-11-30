@@ -8,6 +8,7 @@ export const userState = atom({
     nome: '',
     idade: '',
     email: '',
+    risk: null,
     telefone: '',
     fumante: false,
     pulmonar: false,

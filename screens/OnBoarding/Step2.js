@@ -1,12 +1,28 @@
 import React from "react";
-import {Button, Flex, Text} from "native-base";
-import CustomInput from "../../components/Input";
-import CustomSelect from "../../components/CustomSelect";
-import {userState} from "../../Atoms/userAtom";
 import {useRecoilState} from "recoil";
+import {Button, Flex, Text} from "native-base";
+import {userState} from "../../Atoms/userAtom";
+import CustomInput from "../../components/Input";
+import { cpf as cpfValidator } from 'cpf-cnpj-validator';
+import CustomSelect from "../../components/CustomSelect";
 
 const Step2 = ({ handleNextStep }) => {
   const [user, setUser] = useRecoilState(userState);
+
+  function mphone(v) {
+    let r = v.replace(/\D/g, "");
+    r = r.replace(/^0/, "");
+    if (r.length > 10) {
+      r = r.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+    } else if (r.length > 5) {
+      r = r.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+    } else if (r.length > 2) {
+      r = r.replace(/^(\d\d)(\d{0,5})/, "($1) $2");
+    } else {
+      r = r.replace(/^(\d*)/, "($1");
+    }
+    return r;
+  }
 
   const handleNext = () => {
     handleNextStep([
@@ -29,7 +45,7 @@ const Step2 = ({ handleNextStep }) => {
   const handleCpf = (value) => {
     setUser({
       ...user,
-      cpf: value,
+      cpf: cpfValidator.format(value),
     })
   }
 
@@ -50,7 +66,7 @@ const Step2 = ({ handleNextStep }) => {
   const handleTelefone = (value) => {
     setUser({
       ...user,
-      telefone: value,
+      telefone: mphone(value),
     })
   }
 
@@ -70,23 +86,27 @@ const Step2 = ({ handleNextStep }) => {
         Vamos realizar seu cadastro
       </Text>
       <CustomInput
+        size="lg"
         label='Nome completo'
         value={user.nomeCompleto}
         setValue={handleNomeCompleto}
       />
       <CustomInput
+        size="lg"
         label='CPF'
         value={user.cpf}
         setValue={handleCpf}
         keyboardType="numeric"
       />
       <CustomInput
+        size="lg"
         label='Idade'
         value={user.idade}
         setValue={handleIdade}
         keyboardType="numeric"
       />
       <CustomInput
+        size="lg"
         label='Telefone'
         value={user.telefone}
         keyboardType="numeric"
@@ -94,9 +114,11 @@ const Step2 = ({ handleNextStep }) => {
         placeholder="Ex: (12) 93456-7891"
       />
       <CustomInput
+        size="lg"
         label='Email'
         value={user.email}
         setValue={handleEmail}
+        autoCapitalize={false}
       />
       <CustomSelect
         label='Sexo'

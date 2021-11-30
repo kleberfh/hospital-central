@@ -32,8 +32,9 @@ const Step1 = ({handleNextStep}) => {
         </Text>
       </Flex>
       <CustomInput
+        size="lg"
         label='Nome e sobrenome'
-        value={user.name}
+        value={user.nome}
         setValue={handleName}
         placeholder="Ex: Jose Rodrigues"
       />
